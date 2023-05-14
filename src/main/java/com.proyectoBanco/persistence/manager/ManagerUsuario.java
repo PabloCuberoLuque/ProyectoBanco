@@ -21,7 +21,7 @@ public interface ManagerUsuario extends Manager<Usuario> {
      * @param nif Nif de un usuario especifico para buscarlo en la base de datos.
      * @return Un {@link Set }Un/a {@link Usuario}.
      */
-    Usuario findById(String nif);
+    Usuario findByNif(String nif);
 
 
     /**

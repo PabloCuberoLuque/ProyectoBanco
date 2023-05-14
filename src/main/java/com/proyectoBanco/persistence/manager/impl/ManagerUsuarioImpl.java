@@ -36,14 +36,17 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
     }
 
     @Override
-    public Usuario findById(String nif) {
+    public Usuario findByNif(String nif) {
         String sql= "SELECT * FROM usuario WHERE nif = ?";
 
         try {
             Connection con = connector.getMySQLConnection();
-            Statement stmt = con.createStatement();
+            PreparedStatement stmt = con.prepareStatement(sql);
 
-            ResultSet result = stmt.executeQuery(sql);
+
+            stmt.setString(1,nif);
+
+            ResultSet result = stmt.executeQuery();
 
             Usuario usuario= null;
 
@@ -68,6 +71,7 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
             Connection con = connector.getMySQLConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
 
+
             stmt.setString(1,nombre);
 
             ResultSet result = stmt.executeQuery();
@@ -75,7 +79,6 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
 
 
             Set<Usuario> usuarios = new HashSet<>();
-
 
             while(result.next()){
                 usuarios.add(new Usuario(result));
@@ -98,9 +101,12 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
         try{
             Connection con = connector.getMySQLConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet result = stmt.executeQuery();
+
 
             stmt.setString(1,apellidos);
+
+            ResultSet result = stmt.executeQuery();
+
 
             Set<Usuario> usuarios = new HashSet<>();
 
@@ -127,9 +133,13 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
         try{
             Connection con = connector.getMySQLConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet result = stmt.executeQuery();
+
 
             stmt.setString(1,email);
+
+            ResultSet result = stmt.executeQuery();
+
+
 
             //Inicializo variable
             Usuario usuario = null;
@@ -156,9 +166,10 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
         try{
             Connection con = connector.getMySQLConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet result = stmt.executeQuery();
 
             stmt.setString(1,telefono);
+
+            ResultSet result = stmt.executeQuery();
 
             //Inicializo variable
             Usuario usuario = null;

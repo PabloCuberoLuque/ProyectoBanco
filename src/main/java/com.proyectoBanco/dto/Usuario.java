@@ -10,8 +10,8 @@ import java.sql.SQLException;
 @NoArgsConstructor
 public class Usuario {
     private String nif;
-    private String apellidos;
     private String nombre;
+    private String apellidos;
     private int anoNacimiento;
     private String direccion;
     private String email;
@@ -20,13 +20,13 @@ public class Usuario {
     public Usuario(ResultSet result){
         try{
             this.nif= result.getString("nif");
-            this.apellidos= result.getString("apellidos");
             this.nombre= result.getString("nombre");
+            this.apellidos= result.getString("apellidos");
             this.anoNacimiento= result.getInt("añoNacimiento");
             this.direccion= result.getString("direccion");
             this.email= result.getString("email");
             this.telefono= result.getString("telefono");
-        }catch (SQLException e){
+        }catch(SQLException e){
             e.printStackTrace();
         }
 

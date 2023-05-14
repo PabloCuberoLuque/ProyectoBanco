@@ -21,8 +21,8 @@ public class CuentaBancaria {
         try{
             this.numeroCuenta= result.getString("numeroCuenta");
             this.fechaCreacion= result.getDate("fechaCreacion").toLocalDate();
-            for (int i= 0;i<=30;i++ ){
-                this.usuarios.add(new ManagerUsuarioImpl().findById(result.getString("user"+1)));
+            for (int i= 1;i<=30;i++ ){
+                this.usuarios.add(new ManagerUsuarioImpl().findByNif(result.getString("user"+1)));
             }
 
         }catch (SQLException e){
