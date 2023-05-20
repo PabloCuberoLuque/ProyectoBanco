@@ -20,6 +20,7 @@ public class MySQLConnector {
         }
     }
 
+
     public Connection getMySQLConnection() throws ClassNotFoundException, SQLException{
 
         try {

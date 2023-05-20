@@ -29,20 +29,16 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
-    public static void actualizarUsuario(Usuario usuario) {
+
+        public static void actualizarNombreUsuario(String nombre,String nif) {
         try {Connection con = connector.getMySQLConnection();
-            String sql = "UPDATE usuario SET nif = ? , nombre = ? , apellidos = ? , añoNacimiento = ? , direccion = ? , email = ? , telefono = ? ";
+            String sql = "UPDATE usuario SET nombre = ? WHERE nif = ? ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, usuario.getNif());
-            stmt.setString(2, usuario.getNombre());
-            stmt.setString(3, usuario.getApellidos());
-            stmt.setInt(4, usuario.getAnoNacimiento());
-            stmt.setString(5, usuario.getDireccion());
-            stmt.setString(6,usuario.getEmail());
-            stmt.setString(7,usuario.getTelefono());
+            stmt.setString(1,nombre);
+            stmt.setString(2,nif);
 
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate();
             con.close();
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -51,6 +47,69 @@ public class UsuarioDAO {
     }
 
 
+    public static void actualizarApellidosUsuario(String apellidos,String nif) {
+        try {Connection con = connector.getMySQLConnection();
+            String sql = "UPDATE usuario SET apellidos = ? WHERE nif = ? ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,apellidos);
+            stmt.setString(2,nif);
+
+            stmt.executeUpdate();
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void actualizarDireccionUsuario(String direccion,String nif) {
+        try {Connection con = connector.getMySQLConnection();
+            String sql = "UPDATE usuario SET direccion = ? WHERE nif = ? ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,direccion);
+            stmt.setString(2,nif);
+
+            stmt.executeUpdate();
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void actualizarEmailUsuario(String email,String nif) {
+        try {Connection con = connector.getMySQLConnection();
+            String sql = "UPDATE usuario SET email = ? WHERE nif = ? ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,email);
+            stmt.setString(2,nif);
+
+            stmt.executeUpdate();
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void actualizarTelefonoUsuario(String telefono,String nif) {
+        try {Connection con = connector.getMySQLConnection();
+            String sql = "UPDATE usuario SET telefono = ? WHERE nif = ? ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,telefono);
+            stmt.setString(2,nif);
+
+            stmt.executeUpdate();
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void deleteUsuario(String nif){
         try{Connection con = connector.getMySQLConnection();
@@ -58,7 +117,7 @@ public class UsuarioDAO {
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nif);
-            stmt.executeUpdate();
+            stmt.execute();
             con.close();
 
         } catch (ClassNotFoundException | SQLException e){

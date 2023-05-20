@@ -14,12 +14,13 @@ public class ManagerUsuarioImpl implements ManagerUsuario {
     @Override
     public Set<Usuario> findAll() {
         Set<Usuario> usuarios = new HashSet<>();
+        String sql= "SELECT * FROM usuario";
 
         try{
             Connection con = connector.getMySQLConnection();
             Statement stmt = con.createStatement();
 
-            ResultSet result = stmt.executeQuery("SELECT * FROM usuario");
+            ResultSet result = stmt.executeQuery(sql);
 
             while(result.next()){
                 usuarios.add(new Usuario(result));

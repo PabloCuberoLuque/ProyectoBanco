@@ -26,6 +26,7 @@ public class Usuario {
             this.direccion= result.getString("direccion");
             this.email= result.getString("email");
             this.telefono= result.getString("telefono");
+
         }catch(SQLException e){
             e.printStackTrace();
         }

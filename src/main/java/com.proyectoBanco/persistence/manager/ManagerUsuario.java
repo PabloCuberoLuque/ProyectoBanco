@@ -2,8 +2,6 @@ package com.proyectoBanco.persistence.manager;
 
 import com.proyectoBanco.dto.Usuario;
 
-
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,7 +17,7 @@ public interface ManagerUsuario extends Manager<Usuario> {
      * Busca el usuario en la base de datos por un Nif.
      *
      * @param nif Nif de un usuario especifico para buscarlo en la base de datos.
-     * @return Un {@link Set }Un/a {@link Usuario}.
+     * @return Un/a {@link Usuario}.
      */
     Usuario findByNif(String nif);
 
@@ -45,7 +43,7 @@ public interface ManagerUsuario extends Manager<Usuario> {
      * Busca el usuario en la base de datos de un email.
      *
      * @param email email de un usuario especifico para buscarlo en la base de datos.
-     * @return Un {@link Set }Un/a {@link Usuario}.
+     * @return Un/a {@link Usuario}.
      */
     Usuario findByEmail(String email);
 
@@ -53,7 +51,7 @@ public interface ManagerUsuario extends Manager<Usuario> {
      * Busca el usuario en la base de datos por un telefono.
      *
      * @param telefono email de un usuario especifico para buscarlo en la base de datos.
-     * @return Un {@link Set }Un/a {@link Usuario}.
+     * @return Un/a {@link Usuario}.
      */
     Usuario findByTelefono(String telefono);
 
