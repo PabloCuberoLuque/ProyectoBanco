@@ -22,7 +22,7 @@ public class App {
     public static void menu(){
         Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------------------------------------------------BANCO PABLO---------------------------------------------------------------------------------");
-        System.out.println("Bienvenido. ¿Que desea usted hacer hoy? \nPara funcionalidades con el usuario, introduzca 1. \nPara funcionalidades con la cuenta, introduzca 2. \nPara consultar informacion, introduzca 3.\nPara realizar operaciones, introduzca 4. \nPara salir del programa, introduzca 5.");
+        System.out.println("Bienvenido. ¿Que desea hacer? \nPara funcionalidades con el usuario, introduzca 1. \nPara funcionalidades con la cuenta, introduzca 2. \nPara consultar informacion, introduzca 3.\nPara realizar operaciones, introduzca 4. \nPara salir del programa, introduzca 5.");
         System.out.println("---------------------------------------------------------------------------------BANCO PABLO---------------------------------------------------------------------------------");
         int opcion=0;
         while (opcion != 5 ){
@@ -355,18 +355,16 @@ public class App {
                     System.out.println("Introduzca el nif de tu usuario,el numero de cuenta en la que deseas realizar el ingreso y la cantidad que deseas ingresar");
                     String nifI= sc.nextLine();
                     String numeroCuentaI= sc.nextLine();
-                    Double cantidadI=sc.nextDouble();
+                    double cantidadI=sc.nextDouble();
                     Operacion.IngresarDinero(new ManagerUsuarioImpl().findByNif(nifI),new ManagerCuentaBancariaImpl().findByNumeroCuenta(numeroCuentaI),cantidadI);
-                    System.out.println("Ingreso realizado con exito");
                     App.realizarOperaciones();
                     break;
                 case 2:
                     System.out.println("Introduzca el nif de tu usuario,el numero de cuenta en la que deseas realizar la retirada y la cantidad que deseas retirar");
                     String nifR= sc.nextLine();
                     String numeroCuentaR= sc.nextLine();
-                    Double cantidadR=sc.nextDouble();
+                    double cantidadR=sc.nextDouble();
                     Operacion.retirarDinero(new ManagerUsuarioImpl().findByNif(nifR),new ManagerCuentaBancariaImpl().findByNumeroCuenta(numeroCuentaR),cantidadR);
-                    System.out.println("Retirada realizada con éxito");
                     App.realizarOperaciones();
                     break;
                 case 3:
@@ -374,9 +372,8 @@ public class App {
                     String nif= sc.nextLine();
                     String numeroCuenta1= sc.nextLine();
                     String numeroCuenta2 = sc.nextLine();
-                    Double cantidad1=sc.nextDouble();
+                    double cantidad1=sc.nextDouble();
                     Operacion.transferencia(new ManagerUsuarioImpl().findByNif(nif),new ManagerCuentaBancariaImpl().findByNumeroCuenta(numeroCuenta1),new ManagerCuentaBancariaImpl().findByNumeroCuenta(numeroCuenta2),cantidad1);
-                    System.out.println("Transferencia realizada con éxito");
                     App.realizarOperaciones();
                     break;
                 case 4:

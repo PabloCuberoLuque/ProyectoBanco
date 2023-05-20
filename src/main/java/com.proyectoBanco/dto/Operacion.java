@@ -47,7 +47,7 @@ public class Operacion {
         Set<String> dnis= new ManagerUsuarioCuentaBancariaImpl().findByCuentaDni(c1);
         for (String dni:
                 dnis) {
-            if(dni.equals(u1.getNif())){
+            if(dni.equals(u1.getNif()) && cantidad<new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
                 double saldoActual = new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta());
                 double saldoNuevo =saldoActual-cantidad;
                 c1.setSaldo(saldoNuevo);
@@ -63,9 +63,11 @@ public class Operacion {
                 o1.setCuentaBancaria2(c1);
                 o1.setUsuario(u1);
                 OperacionDAO.createOperacion(o1);
-            } else if (cantidad>new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
+                System.out.println("Retirada realizada con éxito");
+            }
+            if (cantidad>new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
                 System.out.println("No se puede realizar la accion ya que la cantidad es mayor que el saldo que contiene esta cuenta");
-            } else{
+            }else {
                 System.out.println("No se puede realizar la accion ya que el usuario no es titular de la cuenta");
             }
         }{
@@ -95,6 +97,7 @@ public class Operacion {
                 o1.setCuentaBancaria2(c1);
                 o1.setUsuario(u1);
                 OperacionDAO.createOperacion(o1);
+                System.out.println("Ingreso realizado con exito");
             }else{
                 System.out.println("No se puede realizar la accion ya que el usuario no es titular de la cuenta");
             }
@@ -107,7 +110,7 @@ public class Operacion {
         Set<String> dnis= new ManagerUsuarioCuentaBancariaImpl().findByCuentaDni(c1);
         for (String dni:
                 dnis) {
-            if(dni.equals(u1.getNif())){
+            if(dni.equals(u1.getNif()) && cantidad<new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
                 Operacion.IngresarDinero(u1,c2,cantidad);
                 Operacion.retirarDinero(u1,c1,cantidad);
 
@@ -122,6 +125,7 @@ public class Operacion {
                 o1.setCuentaBancaria2(c2);
                 o1.setUsuario(u1);
                 OperacionDAO.createOperacion(o1);
+                System.out.println("Transferencia realizada con éxito");
             }else{
                 System.out.println("No se puede realizar la accion ya que el usuario no es titular de la cuenta");
             }
