@@ -22,7 +22,7 @@ public class Usuario {
             this.nif= result.getString("nif");
             this.nombre= result.getString("nombre");
             this.apellidos= result.getString("apellidos");
-            this.anoNacimiento= result.getInt("añoNacimiento");
+            this.anoNacimiento= result.getInt("anoNacimiento");
             this.direccion= result.getString("direccion");
             this.email= result.getString("email");
             this.telefono= result.getString("telefono");
