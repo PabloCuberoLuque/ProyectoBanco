@@ -14,7 +14,7 @@ public class ManagerOperacionImpl implements ManagerOperacion {
     @Override
     public Set<Operacion> findAll() {
         Set<Operacion> operaciones = new HashSet<>();
-        String sql= "SELECT * FROM usuariosCuentaBancaria";
+        String sql= "SELECT * FROM operacion";
 
         try{
             Connection con = connector.getMySQLConnection();

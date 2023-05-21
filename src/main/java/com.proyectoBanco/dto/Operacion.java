@@ -45,6 +45,7 @@ public class Operacion {
     public static void retirarDinero(Usuario u1 ,CuentaBancaria c1,double cantidad){
         Set<CuentaBancaria> cuentaBancarias=new ManagerUsuarioCuentaBancariaImpl().findByUsuarioCuentaBancaria(u1);
         Set<String> dnis= new ManagerUsuarioCuentaBancariaImpl().findByCuentaDni(c1);
+        boolean a= false;
         for (String dni:
                 dnis) {
             if(dni.equals(u1.getNif()) && cantidad<new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
@@ -64,10 +65,12 @@ public class Operacion {
                 o1.setUsuario(u1);
                 OperacionDAO.createOperacion(o1);
                 System.out.println("Retirada realizada con éxito");
+                a=true;
             }
             if (cantidad>new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
                 System.out.println("No se puede realizar la accion ya que la cantidad es mayor que el saldo que contiene esta cuenta");
-            }else {
+            }
+            if (!a){
                 System.out.println("No se puede realizar la accion ya que el usuario no es titular de la cuenta");
             }
         }{
@@ -76,12 +79,12 @@ public class Operacion {
     }
 
 
-    public static void IngresarDinero(Usuario u1 ,CuentaBancaria c1,double cantidad){
+    public static void ingresarDinero(Usuario u1 ,CuentaBancaria c1,double cantidad){
         Set<CuentaBancaria> cuentaBancarias=new ManagerUsuarioCuentaBancariaImpl().findByUsuarioCuentaBancaria(u1);
         Set<String> dnis= new ManagerUsuarioCuentaBancariaImpl().findByCuentaDni(c1);
         for (String dni:
              dnis) {
-            if(dni.equals(u1.getNif())){
+            if(dni.equals(u1.getNif()) || cantidad>0){
                 double saldoActual = new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta());
                 double saldoNuevo =saldoActual+cantidad;
                 c1.setSaldo(saldoNuevo);
@@ -101,17 +104,39 @@ public class Operacion {
             }else{
                 System.out.println("No se puede realizar la accion ya que el usuario no es titular de la cuenta");
             }
-        }{
+        }}
 
-        }
+        public static void ingresarDineroT(Usuario u1,CuentaBancaria c1,double cantidad){
+        double saldoActual = new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta());
+            if(cantidad>0){
+                    double saldoNuevo =saldoActual+cantidad;
+                    c1.setSaldo(saldoNuevo);
+                    CuentaBancariaDAO.actualizarSaldo(saldoNuevo,c1.getNumeroCuenta());
+                    Operacion o1= new Operacion();
+                    o1.setCodigoOperacion(0);
+                    o1.setCantidad(cantidad);
+                    TipoOperacion tipo = TipoOperacion.INGRESO;
+                    o1.setTipoOperacion(tipo);
+                    LocalDate fecha= LocalDate.now();
+                    o1.setFechaRealizacion(fecha);
+                    o1.setCuentaBancaria1(c1);
+                    o1.setCuentaBancaria2(c1);
+                    o1.setUsuario(u1);
+                    OperacionDAO.createOperacion(o1);
+                    System.out.println("Ingreso realizado con exito");}
+            else{
+                System.out.println("Ingreso fallido");
+            }
     }
+
+
     public static void transferencia(Usuario u1 ,CuentaBancaria c1,CuentaBancaria c2,double cantidad){
         Set<CuentaBancaria> cuentaBancarias=new ManagerUsuarioCuentaBancariaImpl().findByUsuarioCuentaBancaria(u1);
         Set<String> dnis= new ManagerUsuarioCuentaBancariaImpl().findByCuentaDni(c1);
         for (String dni:
                 dnis) {
             if(dni.equals(u1.getNif()) && cantidad<new ManagerCuentaBancariaImpl().findBySaldo(c1.getNumeroCuenta())){
-                Operacion.IngresarDinero(u1,c2,cantidad);
+                Operacion.ingresarDineroT(u1,c2,cantidad);
                 Operacion.retirarDinero(u1,c1,cantidad);
 
                 Operacion o1= new Operacion();

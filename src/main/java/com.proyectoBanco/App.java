@@ -356,7 +356,7 @@ public class App {
                     String nifI= sc.nextLine();
                     String numeroCuentaI= sc.nextLine();
                     double cantidadI=sc.nextDouble();
-                    Operacion.IngresarDinero(new ManagerUsuarioImpl().findByNif(nifI),new ManagerCuentaBancariaImpl().findByNumeroCuenta(numeroCuentaI),cantidadI);
+                    Operacion.ingresarDinero(new ManagerUsuarioImpl().findByNif(nifI),new ManagerCuentaBancariaImpl().findByNumeroCuenta(numeroCuentaI),cantidadI);
                     App.realizarOperaciones();
                     break;
                 case 2:
